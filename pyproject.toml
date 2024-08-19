@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "qaa-chat-vuzopedia"
+version = "0.1.0"
+description = "HH.ru helper for everyday tasks"
+authors = ["plat01"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
