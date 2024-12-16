@@ -1,3 +1,4 @@
+from functools import lru_cache
 import os
 from dotenv import load_dotenv
 
@@ -11,6 +12,10 @@ class Config:
     
     USER_EMAIL = os.getenv('USER_EMAIL')
     USER_PASSWORD = os.getenv('USER_PASSWORD')
+
+@lru_cache()
+def get_settings():
+    return Config
 
 if __name__ == '__main__':
     print(Config.CLIENT_ID, Config.CLIENT_SECRET)
