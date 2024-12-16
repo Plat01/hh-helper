@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, Request
 from fastapi.responses import RedirectResponse
 
-from src.app.services.auth import Auth
+from src.app.services.hh import HHAPIservice
 from src.settings import Config, get_settings
 
 
@@ -18,7 +18,7 @@ async def auth(settings: Config = Depends(get_settings)):
     Returns:
         settings: Config
     """
-    url = Auth.get_auth_url(settings=settings)
+    url = HHAPIservice.get_auth_url(settings=settings)
     return RedirectResponse(url=url)
 
 @router.get('/auth/callback')
@@ -31,5 +31,6 @@ async def auth_callback(request: Request,
     """
     code = request.query_params.get('code')
 
-    resp = await Auth.get_access_token(code, settings=settings)
+    token = await HHAPIservice.get_access_token(code, settings=settings)
+    resp = await HHAPIservice.get_hh_user(token)
     return resp

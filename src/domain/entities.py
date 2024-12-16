@@ -11,5 +11,7 @@ class User(BaseModel):
 
     id: UUID | str
     username: str
+    phone_number: str
+
     token : Token
     
