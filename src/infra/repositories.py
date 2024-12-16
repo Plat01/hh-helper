@@ -53,7 +53,7 @@ class UserRepository(AbstractRepository[User]):
         Returns:
             User: _description_
         """
-        result = await session.db_session.execute(select(User).where(User.id == id))
+        result = await session.db_session.execute(select(User).where(User.id == user_id))
         return result.scalar_one_or_none()
     
     @staticmethod
@@ -74,7 +74,7 @@ class UserRepository(AbstractRepository[User]):
     @staticmethod
     async def delete(session: AsyncSession, id: int) -> None:
         """Delete a user by its ID."""
-        user = await session.get_by_id(id)
+        user = await session.get_by_id(session, id)
         if user:
             await session.db_session.delete(user)
             await session.db_session.commit()
