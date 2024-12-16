@@ -1,6 +1,7 @@
-import asyncio
-from src import bot
+from fastapi import FastAPI
 
-bot = bot.HHBot()
+from src.api import router
 
-print(asyncio.run(bot.get_access_token()))
+app = FastAPI()
+
+app.include_router(router)
